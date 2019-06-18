@@ -1,0 +1,12 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "name": "json-server"
+    },
+    {
+      "id": 2,
+      "name": "local-server"
+    }
+  ]
+}

@@ -1,33 +1,67 @@
-.App {
-  text-align: center;
+body {
+  background-color: rgb(234, 234, 247);
+  color: #282c34;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
+nav {
   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 0px 10px;
 }
 
+.addbutton {
+  background-color: #282c34;
+}
+.addbutton:hover {
+  background-color: #4d4f53;
+}
+.button-right {
+  margin-left: 23em;
+}
+.backbutton,
+.backbutton:hover {
+  background: #4d4f53;
+  margin: 15px 1px;
+}
 .App-link {
   color: #61dafb;
 }
+.pad-item {
+  padding: 15px 3px 8px 3px !important;
+}
+.addnote, .addnote:hover {
+  background: #4d4f53;
+  margin-top: 20px;
+  margin-left: 12px;
+}
+.note-title {
+  font-size: 20px;
+}
+.iconpad {
+  position: relative;
+  top: -3px;
+}
+.logo {
+  width: 35px;
+  height: 35px;
+  position: relative;
+  top: 10px;
+  margin-right: 10px;
+}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media only screen and (max-width: 500px) {
+  .note-title {
+    font-size: 14px;
+  } 
+
+.logo {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  top: 10px;
+  margin-right: 10px;
+}
+  .brand-logo {
+    font-size: 24px !important;
+    position: relative;
+    bottom: 0px;
   }
 }
