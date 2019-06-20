@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 class Listnotes extends Component {
   state = {
@@ -16,18 +17,12 @@ class Listnotes extends Component {
   }
 
   render() {
-    const showdem = this.state.notes.map(note => {
+    const shownotes = this.state.notes.map(note => {
       return (
         <ul className="collection" key={note.id}>
         <li className="collection-item">
-            <div>
-                <a href="#q">{note.name}</a>
-                <a href="#!" className="secondary-content col s1 right">
-                <i className="material-icons">edit</i>
-                </a>
-                <a href="#!" className="secondary-content col s2 right">
-                <i className="material-icons">delete</i>
-                </a>
+            <div className="center">
+                <Link to={'/' + note.id}>{note.name}</Link>
                 </div>
             </li>
       </ul>
@@ -36,9 +31,11 @@ class Listnotes extends Component {
     return (
       <div className="container">
         <div className="row">
-        <button className="btn waves-effect addnote">ADD NOTE</button>
+        <Link to='/new' className="white-text">
+          <button className="btn waves-effect addnote">ADD NOTE</button>
+        </Link>
           <div className="col s12">
-          {showdem}
+          {shownotes}
           </div>
         </div>
       </div>

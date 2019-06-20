@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-class Newnote extends React.Component {
+class Editnote extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -22,8 +22,8 @@ class Newnote extends React.Component {
     });
   };
 
-  submitNote = async () => {
-    let res = await axios.post('http://localhost:3001/notes', this.state);
+  EditNote = async () => {
+    let res = await axios.put('http://localhost:3001/notes', this.state);
     let data = res.data;
     this.setState({ note: data });
     setTimeout(() => {
@@ -33,7 +33,7 @@ class Newnote extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.submitNote();
+    this.EditNote();
     console.log(this.state)
   };
 
@@ -83,4 +83,4 @@ class Newnote extends React.Component {
   }
 }
 
-export default Newnote;
+export default Editnote;
