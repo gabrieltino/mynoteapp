@@ -6,6 +6,7 @@ import Navbar from "./components/NavBar";
 import Listnotes from "./components/Listnotes";
 import Note from "./components/Note";
 import Newnote from "./components/Newnote";
+import Editnote from "./components/Editnote";
 
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
     <Switch>
       <Route exact path="/" component={Listnotes} />
       <Route path="/new" component={Newnote} />
-      <Route path="/edit" component={Newnote} />
+        <Route path="/:note_id/edit" component={Editnote} />
       <Route path="/:note_id" component={Note} />
     </Switch>
     </React.Fragment>

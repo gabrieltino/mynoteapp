@@ -7,8 +7,13 @@
     },
     {
       "name": "Test if it adds up",
-      "content": "Does it?",
+      "content": "cjchai",
       "id": 2
+    },
+    {
+      "name": "Edited om point",
+      "content": "Works extensively",
+      "id": 8
     }
   ]
 }

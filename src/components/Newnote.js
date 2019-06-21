@@ -5,8 +5,8 @@ class Newnote extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      name: null,
-      content: null
+      name: '',
+      content: ''
     };
     this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,7 +29,7 @@ class Newnote extends React.Component {
     setTimeout(() => {
       this.props.history.push("/");
     }, 500);
-};
+  };
 
   handleSubmit = e => {
     e.preventDefault();
@@ -38,6 +38,8 @@ class Newnote extends React.Component {
   };
 
   render() {
+    const { name, content } = this.state;
+    const isEnabled = name.length > 4 && content.length > 4;
     return (
       <div className="container">
         <div className="row">
@@ -47,7 +49,7 @@ class Newnote extends React.Component {
             >
               Back
             </button>
-          <form className="col s12 m11 offset-m2" onSubmit={this.handleSubmit}>
+          <form className="col s12 m11 offset-m2">
             <div className="row">
               <div className="input-field col s12 m9">
                 <input
@@ -71,6 +73,8 @@ class Newnote extends React.Component {
               </div>
             </div>
             <button
+              disabled={!isEnabled} 
+              onClick={this.handleSubmit}
               type="submit"
               className="col offset-s9 offset-m7 btn-floating btn-large waves-effect waves-light backbutton"
             >
