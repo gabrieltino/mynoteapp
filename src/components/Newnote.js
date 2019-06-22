@@ -1,15 +1,17 @@
 import React from "react";
-import axios from "axios";
+import { connect } from "react-redux";
+import propTypes from "prop-types";
+import { addNote } from "../actions/noteActions";
 
 class Newnote extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      content: ''
+      name: "",
+      content: ""
     };
     this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   goBack = e => {
@@ -22,33 +24,30 @@ class Newnote extends React.Component {
     });
   };
 
-  submitNote = async () => {
-    let res = await axios.post('http://localhost:3001/notes', this.state);
-    let data = res.data;
-    this.setState({ note: data });
+  handleSubmit = e => {
+    e.preventDefault();
+    const note = {
+      name: this.state.name,
+      content: this.state.content
+    };
+    this.props.addNote(note);
     setTimeout(() => {
       this.props.history.push("/");
     }, 500);
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.submitNote();
-    console.log(this.state)
-  };
-
   render() {
     const { name, content } = this.state;
-    const isEnabled = name.length > 4 && content.length > 4;
+    const isEnabled = name.length > 3 && content.length > 3;
     return (
       <div className="container">
         <div className="row">
-            <button
-              className="btn backbutton waves-effect col s3 m2 offset-m2"
-              onClick={this.goBack}
-            >
-              Back
-            </button>
+          <button
+            className="btn backbutton waves-effect col s3 m2 offset-m2"
+            onClick={this.goBack}
+          >
+            Back
+          </button>
           <form className="col s12 m11 offset-m2">
             <div className="row">
               <div className="input-field col s12 m9">
@@ -73,7 +72,7 @@ class Newnote extends React.Component {
               </div>
             </div>
             <button
-              disabled={!isEnabled} 
+              disabled={!isEnabled}
               onClick={this.handleSubmit}
               type="submit"
               className="col offset-s9 offset-m7 btn-floating btn-large waves-effect waves-light backbutton"
@@ -87,4 +86,11 @@ class Newnote extends React.Component {
   }
 }
 
-export default Newnote;
+Newnote.propTypes = {
+  addNote: propTypes.func.isRequired
+}
+
+export default connect(
+  null,
+  { addNote }
+)(Newnote);

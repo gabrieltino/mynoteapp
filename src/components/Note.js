@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import propTypes from "prop-types";
+import { deleteNote } from "../actions/noteActions";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -16,13 +19,13 @@ class Note extends Component {
     return this.props.history.push("/");
   };
 
-  deleteNote = async () => {
+  deleteNote = () => {
     let id = this.props.match.params.note_id;
-    axios.delete("http://localhost:3001/notes/" + id);
+    this.props.deleteNote(id);
     setTimeout(() => {
       this.props.history.push("/");
     }, 500);
-  }
+  };
 
   componentDidMount() {
     let id = this.props.match.params.note_id;
@@ -50,14 +53,18 @@ class Note extends Component {
             </div>
           </Link>
           <div className="btn waves-effect red right" onClick={this.deleteNote}>
-            <Link to="/delete" className="white-text">
-              <b>Delete</b>
-            </Link>
+            <b>Delete</b>
           </div>
         </div>
       </div>
     );
   }
 }
+Note.propTypes = {
+  deleteNote: propTypes.func.isRequired
+};
 
-export default Note;
+export default connect(
+  null,
+  { deleteNote }
+)(Note);

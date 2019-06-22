@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import axios from "axios";
+import propTypes from "prop-types";
+import { editNote } from "../actions/noteActions";
 
 class Editnote extends Component {
   constructor(props) {
@@ -9,7 +12,6 @@ class Editnote extends Component {
       content: ""
     };
     this.handleChange = this.handleChange.bind(this);
-    //   this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange = e => {
@@ -25,27 +27,23 @@ class Editnote extends Component {
       content: data.content
     });
   };
-    
-    updateNote = async () => {
-      let id = this.props.match.params.note_id;
-    let res = await axios.put("http://localhost:3001/notes/" + id, this.state);
-    let data = res.data;
-    this.setState({
-      name: data.name,
-      content: data.content
-    });
+
+  handleSubmit = e => {
+    e.preventDefault();
+    let id = this.props.match.params.note_id;
+    const note = {
+      id: id,
+      name: this.state.name,
+      content: this.state.content
+    };
+    this.props.editNote(note);
     setTimeout(() => {
-        this.props.history.push("/");
-      }, 500);
+      this.props.history.push("/");
+    }, 500);
+    console.log("updated");
   };
-    
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.updateNote();
-        console.log('updated');
-    }
-    
-    componentDidMount() {
+
+  componentDidMount() {
     let id = this.props.match.params.note_id;
     this.getNote(id);
   }
@@ -84,8 +82,8 @@ class Editnote extends Component {
                 />
               </div>
             </div>
-            <button 
-              disabled={!isEnabled} 
+            <button
+              disabled={!isEnabled}
               onClick={this.handleSubmit}
               type="submit"
               className="col offset-s9 offset-m7 btn-floating btn-large waves-effect waves-light backbutton"
@@ -98,4 +96,12 @@ class Editnote extends Component {
     );
   }
 }
-export default Editnote;
+
+editNote.propTypes = {
+  editNote: propTypes.func.isRequired
+};
+
+export default connect(
+  null,
+  { editNote }
+)(Editnote);

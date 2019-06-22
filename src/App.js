@@ -8,9 +8,13 @@ import Note from "./components/Note";
 import Newnote from "./components/Newnote";
 import Editnote from "./components/Editnote";
 
+import { Provider } from 'react-redux'
+import store from './store'
+
 const App = () => {
   return (
-    <React.Fragment>
+    <Provider store={store}>
+      <React.Fragment>
       <Navbar />
     <Switch>
       <Route exact path="/" component={Listnotes} />
@@ -19,6 +23,7 @@ const App = () => {
       <Route path="/:note_id" component={Note} />
     </Switch>
     </React.Fragment>
+    </Provider>
   );
 };
 
